@@ -27,23 +27,86 @@
 
 //// New approach --> track difference instead of lefts and rights 
 
+// function validParentheses(parens) {
+//   var difference = 0;
+//   var arr = parens.split('');
+
+//   if (arr[0] === ")") {return false}; 
+//   if (arr[(arr.length-1)] === "(") {return false};
+
+//   for (i=0; i<arr.length; i++) {
+//     if (arr[i] === "(") {
+//       difference++;
+//     } else if (arr[i] === ")") {
+//       difference--;
+//     } 
+//   }
+
+//   if (difference != 0) {return false}
+//   else {return true}
+// }
+
+//// New approach #2 
+
 function validParentheses(parens) {
-  var difference = 0;
-  var arr = parens.split('');
+  const regexNoParens = /[^()]/; 
+  const regexClose = /\)/;
+  const regexOpen = /\(/;
 
-  if (arr[0] === ")") {return false}; 
-  if (arr[(arr.length-1)] === "(") {return false};
+  var counter = 1; 
 
-  for (i=0; i<arr.length; i++) {
-    if (arr[i] === "(") {
-      difference++;
-    } else if (arr[i] === ")") {
-      difference--;
-    } 
+  if (regexNoParens.test(parens) || parens === ""){
+    console.log(true)
+    return true
   }
 
-  if (difference != 0) {return false}
-  else {return true}
+  var arr = parens.split('');
+
+  if (regexClose.test(arr[0])) {
+    console.log(false); 
+    return false; 
+  }
+
+  for (i=0; i<arr.length; i++){
+    if (regexOpen.test(arr[i])) {
+      if (typeof arr[i+1] !== 'undefined') {
+        for (j=(i+1); j<(arr.length-i); j++) {
+          if (regexClose.test(arr[j])) {
+            counter--;
+            break;  
+          } else {
+            counter++; 
+            break; 
+          }
+        }
+      }
+      if (typeof arr[i+1] === 'undefined') {
+        counter++; 
+      }
+    }
+    if(regexClose.test(arr[i])) {
+      if (typeof arr[i-1] !== 'undefined') {
+        for (j=(i-1); j> -1; j--) {
+          if (regexOpen.test(arr[j])) {
+            counter--;
+            break;  
+          } else {
+            counter++; 
+            break; 
+          }
+        }
+    }
+  }
+
+  if (counter === 0) {
+    console.log(true)
+    return true
+  } 
+  else {
+    console.log(false)
+    return false
+  }
+} 
 }
 
 
