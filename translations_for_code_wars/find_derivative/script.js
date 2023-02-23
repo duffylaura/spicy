@@ -34,16 +34,20 @@ function derivative(eq) {
                     } 
                     // the second term will be the exponent 
                     var exponent = parseInt(b[1]); 
-                    }
-                    
+                    }      
                 }
                 else {
                     // deriv rule for linear terms (variable w/ exponent = 1)
+                    // note could be '' or '-'
                     var exponent = 1; 
-                    let c = arr[i].split('x'); 
+                    let c = arr[i].split('x');
                     if (c[0] === '') {
                         var coefficient = parseInt(1); 
-                    } else {
+                    } 
+                    else if (c[0] === '-') {
+                        var coefficient = parseInt(-1); 
+                    }
+                    else {
                         var coefficient = parseInt(c[0]); 
                     } 
                 } 
@@ -88,6 +92,9 @@ derivative('-100');     // 0  // constant term only
 derivative('4x+1');     // 4  // linear plus constant 
 derivative('x');         //1 
 derivative('-x^2+3x+4');  // -2x+3
+
 derivative('x^2-3x+4'); // 2x-3
 derivative('3x^2'); // 6x
 derivative ('-4x^12');  // -48x^11
+derivative ('-3x^3+3x^2-x+10');   /// -9x^2+6x-1
+derivative ('x^4-x^3-x^2-x+7'); // 4x^3-3x^2-2x-1 
