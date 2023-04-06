@@ -18,62 +18,71 @@ const treeOne =
     )
     );
 
-    const treeTwo =
-    new Node(2,
-      new Node(8,
-        new Node(1),
-        new Node(3, 
-            new Node (12),
-            new Node (14)
-      )),
-      new Node(9,
-        new Node(4),
-        new Node(5)
-      )
-      );
-
+const treeTwo =
+    new Node(1,
+        new Node(8,
+            null,
+            new Node(3)
+        ),
+        new Node(4,
+            null,
+            new Node(5,
+                null,
+                new Node(7)
+            )
+        )
+    );
+      
 var temp = []; //build up array to return 
 
 function treeByLevels (node) { //takes an object 
-    temp.push(node.value);
-    if (node instanceof Node && node !== null) {
-        triangle(node)
-        triangle (node.left)
-        triangle(node.right)
-    } 
-    console.log(temp); 
+temp = []; 
+if (node instanceof Node && node !== null) {
+    temp.push(node.value)
+    helper(node); 
+    console.log(temp);
+    return temp;   
+} else {
+    return temp; 
 }
-
-function triangle (node) {
     
+};
+    
+function helper (node) {
+    if (node instanceof Node && node !== null) {
+        triangle(node);
+        triangle (node.left);
+        triangle(node.right);
+        
+        triangle(node.left.left);
+        triangle(node.left.right);
+        
+        triangle(node.right.left); 
+        triangle(node.right.right);
+        
+        
+    }
+
+    
+};
+    
+function triangle (node) {  
+    if (node == null) {
+    return; 
+    }  
     if (node.left instanceof Node) {
-        temp.push(node.left.value)
+        if (node.left.value !== null) {
+            temp.push(node.left.value)
+        }
     }
     if (node.right instanceof Node) {
-        temp.push(node.right.value)
+        if (node.right.value !== null) {
+            temp.push(node.right.value)
+        }
     }
-}
+};
+    
 
+//treeByLevels(treeOne); 
 
-
-treeByLevels(treeOne); 
- 
-
-
-
-// function treeByLevels (rootNode) { //takes an object 
-//     temp.push(rootNode.value);
-//     if (rootNode.left !== null) {
-//         temp.push (rootNode.left.value)
-//         if (rootNode.right !== null) {
-//             temp.push(rootNode.right.value); 
-//         }
-//     }
-//     if (rootNode.left instanceof Node) {
-//         treeByLevels(rootNode.left);
-//     }
-//     if (rootNode.right instanceof Node) {
-//         treeByLevels(rootNode.right)
-//     }
-//     console.log(temp); 
-// }
+treeByLevels(treeTwo); 
