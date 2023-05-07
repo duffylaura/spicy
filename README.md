@@ -1,4 +1,4 @@
-# mock-interviews
+# Practice and Interview Preparation
 
 This repo contains the exercises I have studied and worked on in preparation for software engineering interviews. 
 
