@@ -68,8 +68,3 @@ function toUnderscore(pascalCase) {
 
     return snakeCase;
 }
-
-// Am7Days should equals am7_days 
-  
-
-// My3CodeIs4TimesBetter should equals my3_code_is4_times_better 
